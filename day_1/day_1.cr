@@ -1,4 +1,8 @@
+require "dir"
 require "file"
+require "path"
+
+FILE_PATH = Path.new(Dir.current, "day_1", "source_data.txt")
 
 def store_source(filename)
   source_numbers = [] of Int32
@@ -25,7 +29,12 @@ def find_sum_elements(source_numbers, desired_sum = 2020)
   end
 end
 
-source_numbers = store_source("source_data.txt")
+def answer_part_1
+  source_numbers = store_source(FILE_PATH)
 
-answer = find_sum_elements(source_numbers)
-puts "Found answer: #{answer}"
+  answer = find_sum_elements(source_numbers)
+  puts "Found answer: #{answer}"
+end
+
+puts "Answering part 1:"
+answer_part_1
