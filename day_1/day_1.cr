@@ -1,3 +1,4 @@
+# Advent of Code 2020 Day 1 parts one and two
 require "dir"
 require "file"
 require "path"
@@ -16,24 +17,25 @@ def store_source(filename)
   source_numbers
 end
 
-def find_sum_elements(source_numbers, desired_sum = 2020)
-  matches = Tuple.new
-
-  source_numbers.each_with_index do |number, index|
+def find_sum_elements(source_numbers, desired_sum)
+  source_numbers.each do |number|
     needed = desired_sum - number
     if source_numbers.includes? needed
-      product = number * needed
-      puts "Found #{needed} match with #{number} for product #{product}"
-      return product
+      return [needed, number]
     end
   end
+  [] of Int32
 end
 
 def answer_part_1
   source_numbers = store_source(FILE_PATH)
 
-  answer = find_sum_elements(source_numbers)
-  puts "Found answer: #{answer}"
+  matches = find_sum_elements(source_numbers, 2020)
+  puts "Found matches #{matches}"
+
+  product = matches[0] * matches[1]
+  puts "Found product #{product}"
+  product
 end
 
 puts "Answering part 1:"
