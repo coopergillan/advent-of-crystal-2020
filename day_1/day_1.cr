@@ -40,3 +40,29 @@ end
 
 puts "Answering part 1:"
 answer_part_1
+
+def answer_part_2
+  source_numbers = store_source(FILE_PATH)
+
+  source_numbers.each_with_index do |number, index|
+    next_numbers = source_numbers[index + 1..] + source_numbers[0...index]
+
+    # puts "Assembled next_numbers with length #{next_numbers.size}"
+    # puts "Meanwhile source_numbers currently has length #{source_numbers.size}"
+
+    needed = 2020 - number
+    # puts "Need to find a sum of needed: #{needed}"
+    matches = find_sum_elements(next_numbers, needed)
+
+    if matches.any?
+      # puts "Found matches #{matches} to go with #{number}"
+      puts "Found number #{number} with matches #{matches}"
+      product = number * matches[0] * matches[1]
+      puts "Found final answer product #{product}"
+      product
+    end
+  end
+end
+
+puts "Answering part 2:"
+answer_part_2
